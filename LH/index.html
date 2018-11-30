@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LetterHead Generator</title>
+    <style>
+        body{
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+            
+        }
+        .cardsection{
+            display: flex;
+            margin: 0 auto;
+            background-color: #ccc;
+            background-image: linear-gradient(to right , rgba(130, 230, 243,0.5),rgba(187, 243, 149, 0.5),rgba(149, 243, 204,0.5));
+            padding: 25px;
+            justify-content: center;
+            
+            
+        }
+        .LHDetails{
+            position: fixed;
+            margin: 0px auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 100px 200px 100px 200px 100px 200px;
+            grid-gap: 5px;
+            z-index: 10;
+            background: #fff;
+            left: -98%;
+            top: 0;
+            transition: all .4s ease-out;
+            
+        }
+        .LHDetails:hover{
+            left: 0;
+        }
+        
+        .LHDetails input,label{
+            position: relative;
+            font-size: 20px;
+            
+            
+        }.LHDetails input{
+            border: 1px solid rgb(90, 145, 190);;
+            background-color: rgb(155, 202, 241);
+            border-radius: 4px;
+            padding: 4px;clear: both;
+            
+        }
+        .blockCard{
+        }
+        .LHbutton{
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .LHbutton button {
+            background: rgb(99, 68, 1);
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            width: 90px;
+            color: rgb(233, 235, 88);
+            transition: all .6s;
+            transform: scale(.95);
+            text-transform: uppercase;
+            cursor: pointer;
+            
+        }
+        svg{
+            transform:scale(.9);
+        }
+        .LHbutton button:hover{
+            background: rgb(233, 235, 88);
+            color:rgb(99, 68, 1);
+            transform: scale(1);
+            box-shadow: 0px 0px 9px #000;
+            
+        }
+        #pdfGenerate{
+            background: rgb(1, 99, 9);
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            width: 90px;
+            color: rgb(170, 235, 168);
+            transition: all .6s;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        #pdfGenerate:hover{
+            background: rgb(170, 235, 168);
+            color:rgb(1, 99, 9);
+            box-shadow: 0px 0px 9px #000;
+            
+        }
+        .downloadIcon{
+            color: rgb(43, 226, 226);
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .Card-lables{
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .loader{
+            display: none;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background-color: #000;
+            opacity: .99;
+            z-index: 1000
+        }
+        .spinner{
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .spinner::after{
+            content: "";
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin: 1px;
+            border-radius: 50%;
+            border: 50px solid green;
+            border-color: green rgb(206, 206, 174) green rgb(206, 206, 174);            
+            animation: spinneranimation 2s ease-in-out infinite;
+        }
+        @keyframes spinneranimation{
+            0% {
+                transform: rotate(0deg);
+            }
+            50%{
+                transform: rotate(360deg);
+            }
+            100%{
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <h1 style="color:#fff">Processing.....</h1>
+    </div>
+    <section class="LHDetails">
+        <label for="fname">First Name</label> <input type="text" id="fname">
+        <label for="lname">last Name</label> <input type="text" id="lname">
+        <label for="designation">Designation</label> <input type="text" id="designation">
+        <label for="phone">Phone No</label> <input type="text" id="phone">
+        <label for="email">Email</label> <input type="email" id="email">
+        <label for="website">Website</label> <input type="text" id="website">
+        <label for="address">HouseNo</label><input type="text" id="address">
+        <label for="street">Street/ Lane</label><input type="text" id="street">
+        <label for="city">City</label><input type="text" id="city">
+        <label for="state">State</label><input type="text" id="state">
+        <label for="zip">Zip</label><input type="text" id="zip">
+        <label for="CRN">Reg No</label><input type="text" id="CRN">
+        <label for="RFC">Reg Country</label><input type="text" id="RFC">
+        <span style="right:0;position: absolute; bottom: 50%"> 🡆 </span>
+    </section>
+        <section class="cardsection">
+            <div class="blockCard" id="LHSVG"></div>
+            <div class="blockCard" id="LHSVG_BG"></div>
+        </section>
+        <section class="LHbutton">
+            <!--  <button id="left">Left</button>
+                <button id="center">center</button>
+                <button id="right">Right</button> -->
+            <button id="pdfGenerate">Generate</button>
+            <button id="Downwload" style="visibility: hidden"><span class="downloadIcon">&#x2B07;</span>PDF</button>
+    
+    
+        </section>
+        <script src="./js/jquery.js"></script>
+        <script src="./js/my-opentype.min.js"></script>
+        <script src="./js/LH.js"></script>
+    </body>
+    
+    </html>
